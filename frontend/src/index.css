@@ -1,0 +1,91 @@
+/* Global styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f8fafc, #e0f7fa);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+/* Navigation */
+nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+nav a:hover {
+  background-color: #e3f2fd;
+}
+
+/* Form Inputs */
+input,
+textarea {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px 14px;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  transition: border 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+/* Buttons */
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* General layout helpers */
+h1, h2, h3 {
+  color: #2c3e50;
+}
+
+ul {
+  padding-left: 20px;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e6f7ff;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  min-height: 100vh;
+}
