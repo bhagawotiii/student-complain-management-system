@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Add Link
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('student');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
+
+    // Save new user data locally (for now)
     localStorage.setItem('userRole', role);
     localStorage.setItem('username', username);
-    navigate('/home');
+
+    // Redirect to login or home
+    navigate('/login');
   };
 
   return (
     <div style={styles.container}>
-      <form onSubmit={handleLogin} style={styles.form}>
-        <h2 style={styles.title}>🔐 Login</h2>
+      <form onSubmit={handleSignup} style={styles.form}>
+        <h2 style={styles.title}>📝 Sign Up</h2>
 
         <input
           type="text"
@@ -42,11 +46,7 @@ const LoginPage = () => {
           <option value="admin">Admin</option>
         </select>
 
-        <button type="submit" style={styles.button}>Login</button>
-
-        <p style={styles.signupText}>
-          Don’t have an account? <Link to="/signup" style={styles.link}>Sign Up</Link>
-        </p>
+        <button type="submit" style={styles.button}>Sign Up</button>
       </form>
     </div>
   );
@@ -54,30 +54,20 @@ const LoginPage = () => {
 
 const styles = {
   container: {
-    display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f4f8',
+    display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#e0f7fa',
   },
   form: {
     backgroundColor: '#fff', padding: '40px', borderRadius: '12px', boxShadow: '0 6px 15px rgba(0,0,0,0.1)', width: '90%', maxWidth: '400px',
   },
   title: {
-    textAlign: 'center', marginBottom: '20px', color: '#1e3a8a',
+    textAlign: 'center', marginBottom: '20px', color: '#00796b',
   },
   input: {
     width: '100%', padding: '10px', marginBottom: '15px', borderRadius: '8px', border: '1px solid #ccc',
   },
   button: {
-    width: '100%', padding: '10px', backgroundColor: '#1e3a8a', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '16px', cursor: 'pointer',
-  },
-  signupText: {
-    textAlign: 'center',
-    marginTop: '15px',
-    fontSize: '14px',
-  },
-  link: {
-    color: '#1e3a8a',
-    textDecoration: 'underline',
-    cursor: 'pointer',
+    width: '100%', padding: '10px', backgroundColor: '#00796b', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '16px', cursor: 'pointer',
   },
 };
 
-export default LoginPage;
+export default SignUpPage;

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage'; // 👈 import the SignUp page
 import HomePage from './pages/HomePage';
 import StudentPage from './pages/StudentPage';
 import AdminPage from './pages/AdminPage';
@@ -12,10 +13,11 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Public */}
+        {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} /> {/* 👈 add SignUp route */}
 
-        {/* Home available to all logged-in */}
+        {/* Protected Routes */}
         <Route
           path="/home"
           element={
@@ -25,7 +27,6 @@ const App = () => {
           }
         />
 
-        {/* Student-only route */}
         <Route
           path="/student"
           element={
@@ -35,7 +36,6 @@ const App = () => {
           }
         />
 
-        {/* Admin-only route */}
         <Route
           path="/admin"
           element={
@@ -45,7 +45,7 @@ const App = () => {
           }
         />
 
-        {/* Redirect all other routes to login */}
+        {/* Catch-all route: Redirect to login */}
         <Route path="*" element={<LoginPage />} />
       </Routes>
     </Router>
