@@ -3,18 +3,34 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('student');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    // (Optional) email format validation
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     // Save new user data locally (for now)
     localStorage.setItem('userRole', role);
     localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
 
-    // Redirect to login or home
+    // Redirect to login
     navigate('/login');
   };
 
@@ -33,6 +49,15 @@ const SignUpPage = () => {
         />
 
         <input
+          type="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={styles.input}
+        />
+
+        <input
           type="password"
           placeholder="Password"
           required
@@ -41,10 +66,21 @@ const SignUpPage = () => {
           style={styles.input}
         />
 
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          required
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          style={styles.input}
+        />
+
         <select value={role} onChange={(e) => setRole(e.target.value)} style={styles.input}>
           <option value="student">Student</option>
           <option value="admin">Admin</option>
         </select>
+
+        {error && <p style={styles.error}>{error}</p>}
 
         <button type="submit" style={styles.button}>Sign Up</button>
       </form>
@@ -68,6 +104,9 @@ const styles = {
   button: {
     width: '100%', padding: '10px', backgroundColor: '#00796b', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '16px', cursor: 'pointer',
   },
+  error: {
+    color: 'red', textAlign: 'center', marginBottom: '10px',
+  }
 };
 
 export default SignUpPage;
