@@ -1,18 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ComplaintDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [complaint, setComplaint] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
+
     axios.get(`http://localhost:5000/api/complaints/${id}`)
-      .then(res => setComplaint(res.data))
-      .catch(err => console.error(err));
+      .then(res => {
+        console.log('Complaint data fetched:', res.data);
+        setComplaint(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch complaint:', err);
+        setError('Failed to load complaint. Please try again later.');
+        setLoading(false);
+      });
   }, [id]);
 
-  if (!complaint) return <div style={styles.loading}>Loading Complaint...</div>;
+  if (loading) return <div style={styles.loading}>Loading Complaint...</div>;
+
+  if (error) return (
+    <div style={styles.loading}>
+      <p>{error}</p>
+      <button onClick={() => navigate(-1)} style={styles.backButton}>Go Back</button>
+    </div>
+  );
+
+  if (!complaint) return (
+    <div style={styles.loading}>
+      <p>Complaint not found.</p>
+      <button onClick={() => navigate(-1)} style={styles.backButton}>Go Back</button>
+    </div>
+  );
 
   return (
     <div style={styles.container}>
@@ -26,12 +55,15 @@ const ComplaintDetails = () => {
               ...styles.status,
               backgroundColor:
                 complaint.status === 'Pending' ? '#f39c12' :
-                complaint.status === 'Resolved' ? '#27ae60' : '#e74c3c'
+                complaint.status === 'Resolved' ? '#27ae60' :
+                complaint.status === 'Rejected' ? '#e74c3c' :
+                '#7f8c8d' // default gray if unknown status
             }}
           >
-            {complaint.status}
+            {complaint.status || 'Unknown'}
           </span>
         </div>
+        <button onClick={() => navigate(-1)} style={styles.backButton}>Back to Complaints</button>
       </div>
     </div>
   );
@@ -70,6 +102,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
+    marginBottom: '25px',
   },
   status: {
     padding: '5px 12px',
@@ -82,8 +115,17 @@ const styles = {
     textAlign: 'center',
     paddingTop: '100px',
     fontSize: '18px',
-    color: '#999'
-  }
+    color: '#999',
+  },
+  backButton: {
+    marginTop: '15px',
+    padding: '8px 16px',
+    backgroundColor: '#3498db',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+  },
 };
 
 export default ComplaintDetails;

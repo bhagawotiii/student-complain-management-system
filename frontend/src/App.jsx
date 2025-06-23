@@ -1,28 +1,30 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage'; // 👈 import the SignUp page
-import HomePage from './pages/HomePage';
-import StudentPage from './pages/StudentPage';
+import SignUpPage from './pages/SignUpPage';
 import AdminPage from './pages/AdminPage';
+import StudentDashboardPage from './pages/StudentDashboardPage';
 
 import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} /> {/* 👈 add SignUp route */}
+        <Route path="/signup" element={<SignUpPage />} />
 
         {/* Protected Routes */}
         <Route
           path="/home"
           element={
             <PrivateRoute allowedRoles={['student', 'admin']}>
-              <HomePage />
+              <StudentDashboardPage />
             </PrivateRoute>
           }
         />
@@ -31,7 +33,7 @@ const App = () => {
           path="/student"
           element={
             <PrivateRoute allowedRoles={['student']}>
-              <StudentPage />
+              <StudentDashboardPage />
             </PrivateRoute>
           }
         />
@@ -45,7 +47,7 @@ const App = () => {
           }
         />
 
-        {/* Catch-all route: Redirect to login */}
+        {/* Catch-all route */}
         <Route path="*" element={<LoginPage />} />
       </Routes>
     </Router>

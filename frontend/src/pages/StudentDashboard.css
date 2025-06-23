@@ -1,0 +1,133 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #eef2f3, #8e9eab);
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #1e293b;
+  color: #fff;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+  color: #38bdf8;
+}
+
+.dashboard-main {
+  flex-grow: 1;
+  padding: 40px;
+  color: #1e293b;
+}
+
+.dashboard-main h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  color: #555;
+}
+
+.card-content .card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.card-content .card-count {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.card-content a {
+  text-decoration: none;
+  color: #3b82f6;
+  font-size: 0.9rem;
+}
+.complaint-form-section {
+  margin-top: 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.complaint-form-section h2 {
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+.complaint-form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.complaint-form-section input,
+.complaint-form-section textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.complaint-form-section button {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.complaint-form-section button:hover {
+  background-color: #1e40af;
+}
