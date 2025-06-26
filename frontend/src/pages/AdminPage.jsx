@@ -4,10 +4,10 @@ import { FaUsers, FaExclamationCircle, FaCheckCircle, FaClipboardList } from 're
 
 const AdminPage = () => {
   const stats = [
-    { title: 'Total Complaints', count: 15, icon: <FaClipboardList />, color: '#6a11cb' },
-    { title: 'Pending Complaints', count: 5, icon: <FaExclamationCircle />, color: '#ff6b6b' },
-    { title: 'Resolved Complaints', count: 10, icon: <FaCheckCircle />, color: '#38b000' },
-    { title: 'Total Students', count: 120, icon: <FaUsers />, color: '#00bcd4' },
+    { title: 'Total Complaints', count: 0, icon: <FaClipboardList />, color: '#6a11cb' },
+    { title: 'Pending Complaints', count: 0, icon: <FaExclamationCircle />, color: '#ff6b6b' },
+    { title: 'Resolved Complaints', count: 0, icon: <FaCheckCircle />, color: '#38b000' },
+    { title: 'Total Students', count: 0, icon: <FaUsers />, color: '#00bcd4' },
   ];
 
   return (

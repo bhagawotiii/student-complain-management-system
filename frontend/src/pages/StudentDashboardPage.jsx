@@ -5,9 +5,9 @@ import { FaUsers, FaFolder, FaFileAlt, FaUserShield } from 'react-icons/fa';
 
 const StudentDashboardPage = () => {
   const stats = [
-    { title: ' My Total Complaint', count: 2, icon: <FaUserShield />, color: '#6a11cb' },
-    { title: 'Pending Complaint', count: 7, icon: <FaUsers />, color: '#11998e' },
-    { title: 'Resolve Complaint', count: 5, icon: <FaFolder />, color: '#0f2027' },
+    { title: ' My Total Complaint', count: 0, icon: <FaUserShield />, color: '#6a11cb' },
+    { title: 'Pending Complaint', count: 0, icon: <FaUsers />, color: '#11998e' },
+    { title: 'Resolve Complaint', count: 0, icon: <FaFolder />, color: '#0f2027' },
     
   ];
 
