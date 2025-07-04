@@ -1,23 +1,40 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Add Link
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('student');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    localStorage.setItem('userRole', role);
-    localStorage.setItem('username', username);
-    navigate('/home');
+    setError('');
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        username,
+        password
+      });
+      const { role, username: user, token } = response.data;
+      localStorage.setItem('userRole', role);
+      localStorage.setItem('username', user);
+      localStorage.setItem('token', token);
+      if (role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/student');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Invalid username or password');
+    }
   };
 
   return (
     <div style={styles.container}>
       <form onSubmit={handleLogin} style={styles.form}>
         <h2 style={styles.title}>🔐 Login</h2>
+        {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
 
         <input
           type="text"
@@ -37,15 +54,10 @@ const LoginPage = () => {
           style={styles.input}
         />
 
-        <select value={role} onChange={(e) => setRole(e.target.value)} style={styles.input}>
-          <option value="student">Student</option>
-          <option value="admin">Admin</option>
-        </select>
-
         <button type="submit" style={styles.button}>Login</button>
 
         <p style={styles.signupText}>
-          Don’t have an account? <Link to="/signup" style={styles.link}>Sign Up</Link>
+          Don't have an account? <Link to="/signup" style={styles.link}>Sign Up</Link>
         </p>
       </form>
     </div>

@@ -1,0 +1,161 @@
+.account-setting-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  padding: 40px 10px;
+}
+
+.account-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+  max-width: 420px;
+  width: 100%;
+  padding: 0 0 30px 0;
+  animation: fadeInUp 0.7s cubic-bezier(.39,.575,.56,1) both;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(90deg, #2563eb 0%, #1abcfe 100%);
+  border-radius: 18px 18px 0 0;
+  padding: 32px 32px 24px 32px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.account-avatar {
+  font-size: 3.5rem;
+  background: #fff;
+  color: #2563eb;
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.account-username {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.account-email {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.divider {
+  height: 1px;
+  background: #eaeaea;
+  margin: 0 32px 24px 32px;
+}
+
+.account-form {
+  padding: 0 32px 0 32px;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin: 24px 0 18px 0;
+  letter-spacing: 0.5px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #f6f8fa;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  padding: 0 12px;
+  border: 1.5px solid #eaeaea;
+  transition: border-color 0.2s;
+}
+
+.input-group:focus-within {
+  border-color: #1abcfe;
+  background: #f0faff;
+}
+
+.input-icon {
+  color: #2563eb;
+  font-size: 1.1rem;
+  margin-right: 8px;
+}
+
+.input-field {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1rem;
+  padding: 12px 0;
+  width: 100%;
+  color: #222;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #2563eb 0%, #1abcfe 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.save-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1abcfe 0%, #2563eb 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+.save-btn:disabled {
+  background: #bfc9d1;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.success-msg {
+  color: #27ae60;
+  font-size: 0.98rem;
+  margin: 8px 0 0 0;
+  text-align: center;
+}
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.98rem;
+  margin: 8px 0 0 0;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .account-card {
+    padding: 0 0 18px 0;
+    max-width: 98vw;
+  }
+  .account-header, .account-form, .divider {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .divider {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+} 

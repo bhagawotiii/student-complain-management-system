@@ -1,50 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './StudentDashboard.css';
+import { FaUserCircle } from 'react-icons/fa';
+import { NavLink, Routes, Route } from 'react-router-dom';
+import DashboardHome from './DashboardHome';
+import AccountSetting from './AccountSetting';
 import ComplaintForm from '../components/ComplaintForm';
-import { FaUsers, FaFolder, FaFileAlt, FaUserShield } from 'react-icons/fa';
+import ComplaintHistory from './ComplaintHistory';
 
 const StudentDashboardPage = () => {
-  const stats = [
-    { title: ' My Total Complaint', count: 0, icon: <FaUserShield />, color: '#6a11cb' },
-    { title: 'Pending Complaint', count: 0, icon: <FaUsers />, color: '#11998e' },
-    { title: 'Resolve Complaint', count: 0, icon: <FaFolder />, color: '#0f2027' },
-    
-  ];
+  const [username, setUsername] = useState('Student');
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
-        <h2>Student</h2>
-        <ul>
-          <li>Dashboard</li>
-          <li>My Complaints</li>
-          <li>Resolved</li>
-          <li>Profile</li>
-          <li>Logout</li>
+        <div className="user-section">
+          <FaUserCircle className="user-avatar" size={70} />
+          <div className="user-name">{username}</div>
+        </div>
+        <ul className="sidebar-links">
+          <li>
+            <NavLink to="/student/dashboard" className={({ isActive }) => isActive ? 'active-link' : ''}>Dashboard</NavLink>
+          </li>
+          <li>
+            <NavLink to="/student/account" className={({ isActive }) => isActive ? 'active-link' : ''}>Account Setting</NavLink>
+          </li>
+          <li>
+            <NavLink to="/student/complaint" className={({ isActive }) => isActive ? 'active-link' : ''}>Lodge Complaint</NavLink>
+          </li>
+          <li>
+            <NavLink to="/student/history" className={({ isActive }) => isActive ? 'active-link' : ''}>Complaint History</NavLink>
+          </li>
         </ul>
       </aside>
-
       <main className="dashboard-main">
-        <h1>Dashboard</h1>
-
-        <div className="card-grid">
-          {stats.map((stat, index) => (
-            <div className="card" key={index} style={{ borderLeft: `4px solid ${stat.color}` }}>
-              <div className="card-icon">{stat.icon}</div>
-              <div className="card-content">
-                <p className="card-title">{stat.title.toUpperCase()}</p>
-                <p className="card-count">{stat.count}</p>
-                <a href="#">View →</a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ✅ Complaint Form Section */}
-        <div className="complaint-form-section">
-          <h2>Submit a Complaint</h2>
-          <ComplaintForm />
-        </div>
+        <Routes>
+          <Route path="dashboard" element={<DashboardHome />} />
+          <Route path="account" element={<AccountSetting />} />
+          <Route path="complaint" element={<>
+            <h2 style={{marginBottom: '30px'}}>Register Complaint</h2>
+            <ComplaintForm />
+          </>} />
+          <Route path="history" element={<ComplaintHistory />} />
+          <Route path="*" element={<DashboardHome />} />
+        </Routes>
       </main>
     </div>
   );

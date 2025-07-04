@@ -19,18 +19,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
-        {/* Protected Routes */}
+        {/* Protected Student Dashboard with Nested Routes */}
         <Route
-          path="/home"
-          element={
-            <PrivateRoute allowedRoles={['student', 'admin']}>
-              <StudentDashboardPage />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/student"
+          path="/student/*"
           element={
             <PrivateRoute allowedRoles={['student']}>
               <StudentDashboardPage />
@@ -38,6 +29,7 @@ const App = () => {
           }
         />
 
+        {/* Protected Admin Route */}
         <Route
           path="/admin"
           element={

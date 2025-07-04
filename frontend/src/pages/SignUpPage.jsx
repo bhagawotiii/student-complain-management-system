@@ -95,7 +95,6 @@ const SignUpPage = () => {
 
         <select value={role} onChange={(e) => setRole(e.target.value)} style={styles.input}>
           <option value="student">Student</option>
-          <option value="admin">Admin</option>
         </select>
 
         {error && <p style={styles.error}>{error}</p>}
