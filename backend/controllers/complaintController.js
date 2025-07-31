@@ -76,4 +76,36 @@ exports.adminDeleteComplaint = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
+};
+
+exports.deleteComplaint = async (req, res) => {
+  const complaint = await Complaint.findById(req.params.id);
+  if (!complaint) return res.status(404).json({ error: 'Not found' });
+  if (complaint.user.toString() !== req.user.id) {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
+  await complaint.remove();
+  res.json({ message: 'Complaint deleted' });
+};
+
+exports.updateComplaint = async (req, res) => {
+  const complaint = await Complaint.findById(req.params.id);
+  if (!complaint) return res.status(404).json({ error: 'Not found' });
+  if (complaint.user.toString() !== req.user.id) {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
+  // Update fields as needed
+  Object.assign(complaint, req.body);
+  await complaint.save();
+  res.json(complaint);
+};
+
+// Get complaints for the logged-in user
+exports.getUserComplaints = async (req, res) => {
+  try {
+    const complaints = await Complaint.find({ user: req.user.id });
+    res.json(complaints);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
 }; 

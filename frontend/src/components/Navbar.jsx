@@ -11,17 +11,6 @@ const Navbar = () => {
         <li><Link to="/home">Home</Link></li>
         {role === 'student' && <li><Link to="/student">Student</Link></li>}
         {role === 'admin' && <li><Link to="/admin">Admin</Link></li>}
-        <li>
-          <button
-            onClick={() => {
-              localStorage.removeItem('userRole');
-              window.location.href = '/';
-            }}
-            className="logout-button"
-          >
-            Logout
-          </button>
-        </li>
       </ul>
     </nav>
   );

@@ -37,6 +37,34 @@ const StudentDashboardPage = () => {
             <NavLink to="/student/history" className={({ isActive }) => isActive ? 'active-link' : ''}>Complaint History</NavLink>
           </li>
         </ul>
+        {/* Logout Button */}
+        <button
+          style={{
+            background: 'none',
+            border: 'none',
+            color: '#bfc9d1',
+            fontSize: '1.2rem',
+            fontWeight: 500,
+            width: '100%',
+            textAlign: 'left',
+            padding: '8px 0 8px 10px',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            margin: '20px 0 0 0',
+            transition: 'color 0.2s, background 0.2s',
+            display: 'block',
+          }}
+          onMouseOver={e => { e.target.style.color = '#fff'; e.target.style.background = 'rgba(255,255,255,0.05)'; }}
+          onMouseOut={e => { e.target.style.color = '#bfc9d1'; e.target.style.background = 'none'; }}
+          onClick={() => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = '/login';
+          }}
+        >
+          Logout
+        </button>
       </aside>
       <main className="dashboard-main">
         <Routes>

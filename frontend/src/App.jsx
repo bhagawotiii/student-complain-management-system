@@ -31,7 +31,7 @@ const App = () => {
 
         {/* Protected Admin Route */}
         <Route
-          path="/admin"
+          path="/admin/*"
           element={
             <PrivateRoute allowedRoles={['admin']}>
               <AdminPage />
